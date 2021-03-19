@@ -26,7 +26,8 @@ public class PagingUtils {
     public static <T,V> List<V> shardingExecution(long pageSize, List<T> objList, Function<List<T>,List<V>> mapper){
         Objects.requireNonNull(objList);
         long totalPage = getTotalPage(objList.size(), pageSize);
-        return LongStream.range(1, totalPage + 1).parallel()
+        return LongStream.range(1, totalPage + 1)
+                .parallel()
                 .mapToObj( index -> {
                     List<T> page = getPage(index,pageSize,objList);
                     return mapper.apply(page);
