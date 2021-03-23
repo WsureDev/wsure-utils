@@ -1,15 +1,15 @@
 package top.wsure.common.utils;
 
-import java.util.function.Supplier;
+import java.util.concurrent.Callable;
 
 public class RetryUtils {
 
-    public static <T> T retry(Supplier<? extends T> retry, int tryTimes, long waitTime){
+    public static <T> T retry(Callable<? extends T> retry, int tryTimes, long waitTime){
         T res = null;
 
         for(int index = 0; index < tryTimes; index ++){
             try {
-                res = retry.get();
+                res = retry.call();
                 break;
             } catch (Exception e){
                 e.printStackTrace();

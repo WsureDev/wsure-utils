@@ -1,7 +1,5 @@
 package top.wsure.common.utils;
 
-import top.wsure.common.annotation.EnumGetBy;
-
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.function.Function;
