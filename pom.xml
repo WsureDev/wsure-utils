@@ -6,11 +6,114 @@
 
     <groupId>top.wsure</groupId>
     <artifactId>wsure-utils</artifactId>
-    <version>1.0</version>
+    <name>wsure-utils</name>
+    <description>A toolkit for jdk8+ developers to simplify business code</description>
+    <url>https://github.com/WsureDev/wsure-utils</url>
+    <version>1.0.0.1</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype_snapshots</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype_releases</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
+    <profiles>
+        <profile>
+            <id>releases</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <!-- 这里的id必须要和全局配置中的release id 一致 -->
+                            <serverId>sonatype_releases</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <!-- 如果希望发布后自动执行close和release操作，此处可以调整为true -->
+                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <comments>Wsure</comments>
+            <distribution>repo</distribution>
+            <url>https://spdx.org/licenses/MIT.html</url>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/WsureDev/wsure-utils</url>
+        <connection>https://github.com/WsureDev/wsure-utils.git</connection>
+        <developerConnection>https://github.com/WsureDev</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>Wsure</name>
+            <email>root@wsure.top</email>
+            <organization>https://github.com/WsureDev</organization>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
 </project>
