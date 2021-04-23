@@ -9,7 +9,7 @@
     <name>wsure-utils</name>
     <description>A toolkit for jdk8+ developers to simplify business code</description>
     <url>https://github.com/WsureDev/wsure-utils</url>
-    <version>1.0.0.1</version>
+    <version>1.0.0.2</version>
     <packaging>jar</packaging>
 
     <properties>
